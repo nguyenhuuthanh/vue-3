@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ep3: Lists, Conditionals, and Computed Properties</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-screen">
+    <div id="app">
+        <section class="bg-cyan-600">
+            <h2 class="font-bold mb-2">Assignments</h2>
+            <ul class="h-56 grid grid-cols-3 gap-4 content-center">
+                <li v-for="item in items" :key="item.id">
+                    <label>
+                        {{ item.name}}
+                        <input type="checkbox" v-model="item.status">
+                    </label>
+
+                </li>
+            </ul>
+        </section>
+
+        <section v-show="activatedItem.length" class="bg-zinc-300 mt-4">
+            <h2 class="font-bold mb-2">Finish</h2>
+            <ul class="h-56 grid grid-cols-3 gap-4 content-center">
+                <li v-for="item in activatedItem">
+                    <label>
+                        {{ item.name}}
+                        <input type="checkbox" v-model="item.status">
+                    </label>
+
+                </li>
+            </ul>
+        </section>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    items: [
+                        {name: 'Ten01', status: false, id: 1},
+                        {name: 'Ten02', status: true, id: 2},
+                        {name: 'Ten03', status: false, id: 3},
+                    ]
+                }
+            },
+            computed: {
+                activatedItem() {
+                    return this.items.filter(item => item.status)
+                },
+            }
+
+
+        }).mount('#app');
+    </script>
+</body>
+</html>
