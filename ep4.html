@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ep4: Your First Vue Component</title>
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <app-button></app-button>
+    </div>
+    <script>
+        let app = {
+            components: {
+                'app-button': {
+                    template: `
+                        <div>
+                            <h2>what's up</h2>
+                            <button :disabled="processing">Click me</button>
+                        </div>
+                    `,
+                    mounted() {
+                        alert('app button')
+                        setTimeout(() => this.processing = true, 2000)
+                    },
+
+                    data() {
+                        return {
+                            processing: false
+                        }
+                    }
+                }
+            }
+        }
+        Vue.createApp(app).mount('#app');
+    </script>
+</body>
+</html>
